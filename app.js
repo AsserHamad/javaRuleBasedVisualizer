@@ -3,10 +3,16 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
 const app = express();
+const mongoose = require('mongoose');
 
-const users = require('./routes/users');
+const Errors = require('./errors/Errors')
+const main = require('./routes/main');
 
 require('dotenv').config();
+mongoose.connect(
+        process.env.DB_URL, 
+        { useNewUrlParser: true }
+);
 
 if(!process.env.ENV)
     app.use(logger("DEV"));
@@ -15,10 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 //Routes
-app.use('/users', users);
+app.use('/', main);
 
 app.use((err, req, res, next) => {
-    console.log(err);
+    if (err instanceof Errors.BaseError)
+        res.status(err.status).json(err.error);
 });
 
 const server = http.createServer(app);
