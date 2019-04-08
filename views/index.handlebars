@@ -1,0 +1,18 @@
+<div class="col-xs-6">
+    public class Test{
+
+    <form action="/" method="POST">
+        <textarea name="constfuncs" placeholder="Add your functions here" rows="10" cols="50"></textarea><br>
+        public static void main(String[] args){<br>
+            <textarea name="main" placeholder="Add your java code here" rows="10" cols="50"></textarea><br>
+        }<br>
+    }<br>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+<div class="col-xs-6">
+    {{#each variables}}
+        <p>{{ this.type }} {{ this.name }} = {{ this.value }}</p>
+    {{/each}}
+  <p>{{ error }}</p>
+</div>

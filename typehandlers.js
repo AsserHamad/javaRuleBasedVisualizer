@@ -1,29 +1,35 @@
-const identifiers = [{
-    name: 'int',
-    regex: '[0-9]+',
-}]
+const identifierss = {
+    int: '^[0-9]+$',
+    double: '^[0-9]+(\.[0-9]+)?$',
+    float: '^[0-9]+(\.[0-9]+)?$',
+    String: '^"([0-9a-zA-Z]*[-!$%^&*#%^()_+|~=`@{}:";<>?,./]*)*"$',
+    boolean: '^true|false$'
+};
 
-const inthandler = function(line, variables){
-    const name = line[1];
-    const value = line[3];
+const handler = function(type, name, value, variables){
     let duplicate = variableExists(name, variables);
     if (duplicate) 
         return duplicate;
-    if(!/^[0-9]+$/.test(value)){
+    let match = new RegExp(identifierss[type], 'i');
+    console.log(`testing ${match} with ${value}`)
+    if(!match.test(value)){
         return {
             error: {
-                message: "Incorrect value for int"
+                message: `Incorrect value for ${type}`
             }
         }
     } else {
+        //Remove Quotes
+        if(type == 'String')
+            value = value.slice(1, value.length-1);
+        
         return {
             name: name,
-            value: value
+            value: value,
+            type: type
         }
     };
 }
-
-let handlers = {int: inthandler};
 
 //Helper Functions
 function variableExists(varName, variables){
@@ -39,4 +45,4 @@ function variableExists(varName, variables){
 
 }
 
-module.exports = handlers;
+module.exports = handler;
