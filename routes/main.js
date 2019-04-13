@@ -3,7 +3,9 @@ const router = express.Router();
 const Errors = require('../errors/Errors');
 const handler = require('../typehandlers');
 const identifiers = require('../identifiers');
-const constfuncs = require('../middleware/constfuncs');
+const Attributes = require('../middleware/attributes');
+const Constructors = require('../middleware/constructors');
+const Functions = require('../middleware/functions');
 
 let variables = [];
 
@@ -15,12 +17,15 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     console.log(req.body);
-    const code = req.body.main;
-    const cf = req.body.constfuncs;
+    const atts = req.body.attributes.replace(/\r|\n/g, '');
+    const consts = req.body.constructors.replace(/\r|\n/g, '');
+    const functions = req.body.functions.replace(/\r|\n/g, '');
 
-    constfuncs(cf);
+    Attributes(atts);
+    Constructors(consts);
+    Functions(functions);
 
-    let lines = code.replace(/\r?\n|\r/i, '');
+    let lines = req.body.main.replace(/\r?\n|\r/i, '');
     lines = lines.split(';');
     // lines = typeOfQuery(lines);
     console.log(lines);

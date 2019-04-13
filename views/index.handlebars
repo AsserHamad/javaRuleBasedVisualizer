@@ -1,12 +1,42 @@
+<style>
+    .titles{
+        font-family: sans-serif;
+        font-weight: bold;
+        color: #3d3d3d;
+    }
+</style>
 <div class="col-xs-6">
-    public class Test{
+    <p class="titles">public class Test{</p>
 
     <form action="/" method="POST">
-        <textarea name="constfuncs" placeholder="Add your functions here" rows="10" cols="50"></textarea><br>
-        public static void main(String[] args){<br>
-            <textarea name="main" placeholder="Add your java code here" rows="10" cols="50"></textarea><br>
-        }<br>
-    }<br>
+        <i>//Attribute Declarations</i><br>
+        <textarea name="attributes" placeholder="Add your attribute declarations here" rows="2" cols="50">
+int age;
+String name;
+        </textarea><br>
+        <i>//Constructors</i><br>
+        <textarea name="constructors" placeholder="Add your constructors here" rows="7" cols="50">
+public Test(int age, String name){
+    this.age = age;
+    this.name = name;
+}
+private Test(int age){
+    this.age = age;
+}
+        </textarea><br>
+        <i>//Functions</i><br>
+        <textarea name="functions" placeholder="Add your functions here" rows="7" cols="50">
+public int getAge(){
+    return this.age;
+}
+public static String getName(){
+    return this.name;
+}
+        </textarea><br>
+        <p class="titles">public static void main(String[] args){</p>
+        <textarea name="main" placeholder="This is your playground, test around here" rows="2" cols="50"></textarea><br>
+        <p class="titles">}<br>
+        }</p>
         <input type="submit" value="Submit" />
     </form>
 </div>
