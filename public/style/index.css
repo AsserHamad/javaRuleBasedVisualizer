@@ -1,0 +1,26 @@
+*{
+    font-family: Roboto;
+}
+
+.attribute-name{
+    font-weight: bold;
+}
+
+.attribute-type{
+    color: red;
+}
+.constructor-name{
+    font-size: 150%;
+    color: #00ACC1;
+}
+.constructor-parameter{
+    border: 1px solid rgba(0,0,0,0.3);
+}
+.function{
+    border: 2px solid black;
+    border-radius: 1px;
+    box-shadow: 0px 0px 10px black;
+}
+.function-name{
+    font-weight: bold;
+}

@@ -13,9 +13,9 @@ function Constructor(name, access, parameters, code) {
 let constructors = [];
 
 const Constructors = (consts) => {
-    console.log('//////////CONSTRUCTORS//////////');
+    constructors = [];
     getConstructors(consts);
-    console.log(constructors);
+    return constructors;
 }
 
 //Constructor Work
@@ -33,7 +33,7 @@ function getConstructors(consts) {
     let indices = indicesOfConstructors(consts);
     if (indices != null)
         for (let index of indices) {
-            let substr = consts.substr(index, consts.length);
+            let substr = consts.substring(index, consts.length);
             let brackets = [];
             let end = -1;
             //To ensure at least one bracket exists
@@ -47,7 +47,7 @@ function getConstructors(consts) {
                 }
                 i++;
             }
-            let constr = substr.substr(0, i - 1);
+            let constr = substr.substring(0, i - 1);
             let constrElements = dissectConstructor(constr);
             while (i < substr.length) {
                 if (substr.charAt(i) == '{') {
@@ -61,7 +61,7 @@ function getConstructors(consts) {
                 }
                 i++;
             }
-            let code = (index != end) ? substr.substr(index, end - 1) : '';
+            let code = (index != end) ? substr.substring(index, end - 1) : '';
             constructors.push(new Constructor(
                 constrElements.name,
                 constrElements.access,
@@ -97,7 +97,7 @@ function getParameters(string) {
     params.map((param) => {
         param = param.match(/[a-zA-Z]+ [a-zA-Z_0-9]/)[0];
         param = param.split(' ');
-        returnParams.push(new Parameter(param[0], param[1]));
+        returnParams.push(new Parameter(param[1], param[0]));
     });
     return returnParams;
 }

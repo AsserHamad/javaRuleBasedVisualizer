@@ -7,9 +7,9 @@ function Attribute(name, type, value) {
 let attributes = [];
 
 const Attributes = (atts) => {
-    console.log('//////////ATTRIBUTES//////////');
+    attributes = [];
     getAttributes(atts);
-    console.log('Attributes List: ', attributes);
+    return attributes;
 }
 
 function getAttributes(atts) {

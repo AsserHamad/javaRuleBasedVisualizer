@@ -15,16 +15,16 @@ function Function(name, access, parameters, returnType, static, code) {
 let functions = [];
 
 const Functions = (funcs) => {
-        console.log('//////////FUNCTIONS//////////');
+    functions = [];
     getFunctions(funcs);
-    console.log('Functions List: ', functions);
+    return functions;
 }
 function getFunctions(funcs) {
     //Get Functions
     let indices = indicesOfFunctions(funcs);
     if (indices != null)
         for (let index of indices) {
-            let substr = funcs.substr(index, funcs.length);
+            let substr = funcs.substring(index, funcs.length);
             let brackets = [];
             let end = -1;
             //To ensure at least one bracket exists
@@ -38,15 +38,13 @@ function getFunctions(funcs) {
                 }
                 i++;
             }
-            let constr = substr.substr(0, i - 1);
+            let constr = substr.substring(0, i - 1);
             let funcElements = dissectFunctionConstructor(constr);
             while (i < substr.length) {
-                console.log(substr.charAt(i))
                 if (substr.charAt(i) == '{') {
                     brackets.push('{');
                 } else if (substr.charAt(i) == '}') {
                     brackets.pop();
-                    console.log(`removed {, brackets now ${brackets}`);
                 }
                 if (brackets.length == 0) {
                     end = i;
@@ -54,7 +52,7 @@ function getFunctions(funcs) {
                 }
                 i++;
             }
-            let code = (index != end) ? substr.substr(index, end - 1) : '';
+            let code = (index != end) ? substr.substring(index, end-1) : '';
             functions.push(new Function(
                     funcElements.name,
                     funcElements.access,

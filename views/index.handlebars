@@ -5,6 +5,8 @@
         color: #3d3d3d;
     }
 </style>
+<div class="container container-fluid">
+
 <div class="col-xs-6">
     <p class="titles">public class Test{</p>
 
@@ -37,12 +39,62 @@ public static String getName(){
         <textarea name="main" placeholder="This is your playground, test around here" rows="2" cols="50"></textarea><br>
         <p class="titles">}<br>
         }</p>
-        <input type="submit" value="Submit" />
+        <input class="btn btn-danger" type="submit" value="Submit" />
     </form>
 </div>
-<div class="col-xs-6">
-    {{#each variables}}
-        <p>{{ this.type }} {{ this.name }} = {{ this.value }}</p>
-    {{/each}}
-  <p>{{ error }}</p>
+    <div class="col-xs-6">
+        <div class="row center text-center">
+            <div class="col-xs-6">
+                <p>Variable Representation</p>
+                <button class="btn btn-info">Bars</button>
+                <button class="btn btn-success">Text</button>
+            </div>
+            <div class="col-xs-6">
+                <p>Variable Representation</p>
+                <button class="btn btn-info">Bars</button>
+                <button class="btn btn-success">Text</button>
+            </div>
+        </div>
+        <div class="row center text-center">
+            <p><h3>Attributes</h3></p>
+            {{#each attributes}}
+                <p class="attribute-name col-xs-4">{{this.name}} - <span class="attribute-type">{{this.type}}</span></p>
+            {{/each}}
+        </div>
+        <hr>
+        <div class="row center text-center">
+            <p><h3>Constructors</h3></p>
+            <p class="constructor-name">Test</p>
+                {{#each constructors}}
+                <div class="row">
+                    {{#each this.parameters}}
+                        <p class="col-xs-4 constructor-parameter">{{this.name}} {{this.type}}</p>
+                    {{/each}}
+                </div>
+                {{/each}}
+        </div><hr>
+        <div class="row center text-center">
+            <p>
+                <h3>Functions</h3>
+            </p>
+            {{#each functions}}
+                <div class="col-xs-4 function text-left">
+                    <span class="function-label">Name:</span> <span class="function-name">{{this.name}}</span><br>
+                    <span class="function-label">Static:</span> <span class="function-name">{{this.static}}</span><br>
+                    <span class="function-label">Returns:</span> <span class="function-name">{{this.returnType}}</span><br>
+                    <span class="function-label">Access:</span> <span class="function-name">{{this.access}}</span><br>
+                </div>
+            {{/each}}
+        </div><hr>
+        <div class="row center text-center">
+            <h3>Variables</h3>
+            {{#each _main.variables}}
+            <div class="row">
+                <p>{{this.name}}</p>
+                <p style="font-size:130%;color:red;">{{this.type}}</p>
+            </div>
+            {{/each}}
+        </div>
+    <p>{{ error }}</p>
+    </div>
 </div>
