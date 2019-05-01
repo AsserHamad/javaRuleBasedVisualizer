@@ -1,7 +1,8 @@
 let variables = [],
     attributes = [],
     constructors = [],
-    functions = [];
+    functions = [],
+    sequence = [];
 
 function Variable(name, type, value) {
     this.name = name;
@@ -9,10 +10,12 @@ function Variable(name, type, value) {
     this.value = value;
 }
 
+// function Sequence();
+
 const Main = (main, atts, consts, funcs) => {
     attributes = atts, constructors = consts, functions = funcs;
     let lines = main.split(';');
-    console.log(lines);
+    
     let count = 0;
     for (let line of lines) {
         count++;
@@ -61,20 +64,22 @@ function declarationHandler(line){
             let value = fuseValues(snips, 3);
             let variable = new Variable(snips[1], snips[0], value);
             variables.push(variable);
-            // console.log('new variable', variable);
+            console.log('new variable', variable);
         }
     }
 }
 
 function functionHandler(line) {
-
+    console.log('function called');
 }
 
 function staticFunctionHandler(line) {
+    console.log('static function called');
 
 }
 
 function assignmentHandler(line) {
+    console.log('assignment called');
 
 }
 

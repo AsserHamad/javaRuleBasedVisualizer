@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>无标题文档</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="bars.css" rel="stylesheet" type="text/css">
+</head>
+
+<body><div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="http://www.jqueryscript.net/chart-graph/Responsive-Customizable-Bar-Indicator-with-jQuery-Bars-js.html">Download This Plugin</a></li>
+<li><a href="http://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript">
+    google_ad_client = "ca-pub-2783044520727903";
+    google_ad_slot = "2780937993";
+    google_ad_width = 728;
+    google_ad_height = 90;
+</script>
+<!-- jQuery_demo -->
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<h1 style="margin:150px auto 30px auto; text-align:center;">Bar.js Demos</h1>
+<h2 style="text-align:center;">Scroll down the page</h2>
+<section class='bar top'>
+  <h2>Bar styles</h2>
+  <h3>Pre-built bar themes, more to come soon!</h3>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Thin Bars</h4>
+        <p>.bar_group__bar.thin</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thin' value='230'></div>
+        <div class='bar_group__bar thin' value='130'></div>
+        <div class='bar_group__bar thin' value='160'></div>
+        <div class='bar_group__bar thin' value='340'></div>
+        <div class='bar_group__bar thin' value='290'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Thick Bars</h4>
+        <p>.bar_group__bar.thick</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thick' value='230'></div>
+        <div class='bar_group__bar thick' value='130'></div>
+        <div class='bar_group__bar thick' value='160'></div>
+        <div class='bar_group__bar thick' value='340'></div>
+        <div class='bar_group__bar thick' value='290'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Bars with no background</h4>
+        <p>.bar_group__bar.n_bg</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thin n_bg' value='230'></div>
+        <div class='bar_group__bar thin n_bg' value='130'></div>
+        <div class='bar_group__bar thin n_bg' value='160'></div>
+        <div class='bar_group__bar thin n_bg' value='340'></div>
+        <div class='bar_group__bar thin n_bg' value='290'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+</section>
+<section class='alt'>
+  <section class='bar'>
+    <h2>Value options</h2>
+    <h3>Setting maximum values</h3>
+    <section class='wrap'>
+      <div class='wrap_left'>
+        <div class='bar_description'>
+          <h4>Default max</h4>
+          <p>By default, Bars.js finds the highest value in a bar group and bases the comparison on that</p>
+        </div>
+      </div>
+      <div class='wrap_right'>
+        <div class='bar_group'>
+          <div class='bar_group__bar thin' value='230'></div>
+          <div class='bar_group__bar thin' value='130'></div>
+          <div class='bar_group__bar thin' value='160'></div>
+          <div class='bar_group__bar thin' value='340'></div>
+          <div class='bar_group__bar thin' value='290'></div>
+        </div>
+      </div>
+    </section>
+    <div class='clear'></div>
+    <section class='wrap'>
+      <div class='wrap_left'>
+        <div class='bar_description'>
+          <h4>Defined max of 500</h4>
+          <p>If you want to change the maximum of the bar the group add {:max => 'Your max'} to the bar group element</p>
+        </div>
+      </div>
+      <div class='wrap_right'>
+        <div class='bar_group' max='500'>
+          <div class='bar_group__bar thin' value='230'></div>
+          <div class='bar_group__bar thin' value='130'></div>
+          <div class='bar_group__bar thin' value='160'></div>
+          <div class='bar_group__bar thin' value='340'></div>
+          <div class='bar_group__bar thin' value='290'></div>
+        </div>
+      </div>
+    </section>
+    <div class='clear'></div>
+  </section>
+</section>
+<section class='bar'>
+  <h2>Display option</h2>
+  <h3>Show max/min values, tooltips and more.</h3>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Show data labels</h4>
+        <p>:label => 'Hunger'</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thin' label='Oranges' value='230'></div>
+        <div class='bar_group__bar thin' label='Apples' value='130'></div>
+        <div class='bar_group__bar thin' label='Grapes' value='160'></div>
+        <div class='bar_group__bar thin' label='Strawberrys' value='340'></div>
+        <div class='bar_group__bar thin' label='Pineapples' value='290'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Show values</h4>
+        <p>:show_values => 'true'</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thin' label='jQuery' show_values='true' value='343'></div>
+        <div class='bar_group__bar thin' label='AJAX' show_values='true' value='235'></div>
+        <div class='bar_group__bar thin' label='PHP' show_values='true' value='675'></div>
+        <div class='bar_group__bar thin' label='SASS' show_values='true' value='456'></div>
+        <div class='bar_group__bar thin' label='HAML' show_values='true' value='245'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Custom unit of measure</h4>
+        <p>:unit => '% etc'</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thin' label='Vuaxhall Corsa' show_values='true' unit='mpg' value='343'></div>
+        <div class='bar_group__bar thin' label='Toyota Celica' show_values='true' unit='mpg' value='235'></div>
+        <div class='bar_group__bar thin' label='Landrover' show_values='true' unit='mpg' value='675'></div>
+        <div class='bar_group__bar thin' label='Peagueot 106' show_values='true' unit='mpg' value='456'></div>
+        <div class='bar_group__bar thin' label='Lawnmower' show_values='true' unit='mpg' value='245'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Show tooltips</h4>
+        <p>:tooltip => 'true'</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group'>
+        <div class='bar_group__bar thin' label='jQuery' show_values='true' tooltip='true' value='343'></div>
+        <div class='bar_group__bar thin' label='AJAX' show_values='true' tooltip='true' value='235'></div>
+        <div class='bar_group__bar thin' label='PHP' show_values='true' tooltip='true' value='675'></div>
+        <div class='bar_group__bar thin' label='SASS' show_values='true' tooltip='true' value='456'></div>
+        <div class='bar_group__bar thin' label='HAML' show_values='true' tooltip='true' value='245'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+</section>
+<section class='alt'>
+  <section class='bar'>
+    <h2>Colors</h2>
+    <h3>Setting color schemes</h3>
+    <section class='wrap'>
+      <div class='wrap_left'>
+        <div class='bar_description'>
+          <h4>Gradient bars</h4>
+          <p>.bar_group__bar.thin.gradient</p>
+        </div>
+      </div>
+      <div class='wrap_right'>
+        <div class='bar_group'>
+          <div class='bar_group__bar thin gradient' value='230'></div>
+          <div class='bar_group__bar thin gradient' value='130'></div>
+          <div class='bar_group__bar thin gradient' value='160'></div>
+          <div class='bar_group__bar thin gradient' value='340'></div>
+          <div class='bar_group__bar thin gradient' value='290'></div>
+        </div>
+      </div>
+    </section>
+    <div class='clear'></div>
+    <section class='wrap'>
+      <div class='wrap_left'>
+        <div class='bar_description'>
+          <h4>Custom colors</h4>
+          <p>Assign a new css selector</p>
+        </div>
+      </div>
+      <div class='wrap_right'>
+        <div class='bar_group' max='500'>
+          <div class='bar_group__bar thin c_red' value='230'></div>
+          <div class='bar_group__bar thin c_green' value='130'></div>
+          <div class='bar_group__bar thin c_blue' value='160'></div>
+          <div class='bar_group__bar thin c_pink' value='340'></div>
+          <div class='bar_group__bar thin c_brown' value='290'></div>
+        </div>
+      </div>
+    </section>
+    <div class='clear'></div>
+  </section>
+</section>
+<section class='bar'>
+  <h2>Effects</h2>
+  <h3>Snazzy effects for extra swag</h3>
+  <section class='wrap'>
+    <div class='wrap_left'>
+      <div class='bar_description'>
+        <h4>Elastic</h4>
+        <p>.elastic</p>
+      </div>
+    </div>
+    <div class='wrap_right'>
+      <div class='bar_group' max='600'>
+        <div class='bar_group__bar thin elastic' label='Oranges' value='230'></div>
+        <div class='bar_group__bar thin elastic' label='Apples' value='130'></div>
+        <div class='bar_group__bar thin elastic' label='Grapes' value='160'></div>
+        <div class='bar_group__bar thin elastic' label='Strawberrys' value='340'></div>
+        <div class='bar_group__bar thin elastic' label='Pineapples' value='290'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </section>
+</section>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="bars.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
