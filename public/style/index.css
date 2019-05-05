@@ -24,3 +24,7 @@
 .function-name{
     font-weight: bold;
 }
+
+#attributes, #constructors, #functions, #variables{
+    display: none;
+}

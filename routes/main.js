@@ -28,14 +28,13 @@ router.post('/', (req, res, next) => {
     let functions = Functions(funcs);
     let _main = Main(main, attributes, constructors, functions);
     
-    res.render('index', {
+    res.json({
         variables,
         attributes,
         constructors,
         functions,
-        _main,
-        title: 'Java Visualizer'
+        _main
     });
-})
+});
 
 module.exports = router;

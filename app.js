@@ -16,8 +16,8 @@ require('dotenv').config();
 //         { useNewUrlParser: true }
 // );
 
-if(!process.env.ENV)
-    app.use(logger("DEV"));
+// if(!process.env.ENV)
+//     app.use(logger("DEV"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

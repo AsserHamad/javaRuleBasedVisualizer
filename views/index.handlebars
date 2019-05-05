@@ -10,7 +10,7 @@
 <div class="col-xs-6">
     <p class="titles">public class Test{</p>
 
-    <form action="/" method="POST">
+    <form>
         <i>//Attribute Declarations</i><br>
         <textarea name="attributes" placeholder="Add your attribute declarations here" rows="2" cols="50">
 int age;
@@ -36,44 +36,30 @@ public static String getName(){
 }
         </textarea><br>
         <p class="titles">public static void main(String[] args){</p>
-        <textarea name="main" placeholder="This is your playground, test around here" rows="2" cols="50"></textarea><br>
+        <textarea name="main" placeholder="This is your playground, test around here" rows="3" cols="50">
+int x = 1;
+int y = 2;
+Test test = new Test(x,y);
+        </textarea><br>
         <p class="titles">}<br>
         }</p>
-        <input class="btn btn-danger" type="submit" value="Submit" />
+        <input id="submit" class="btn btn-danger" value="Submit" />
     </form>
 </div>
+
     <div class="col-xs-6">
-        <div class="row center text-center">
-            <div class="col-xs-6">
-                <p>Variable Representation</p>
-                <button class="btn btn-info">Bars</button>
-                <button class="btn btn-success">Text</button>
-            </div>
-            <div class="col-xs-6">
-                <p>Variable Representation</p>
-                <button class="btn btn-info">Bars</button>
-                <button class="btn btn-success">Text</button>
-            </div>
-        </div>
-        <div class="row center text-center">
+        <div id="attributes" class="row center text-center">
             <p><h3>Attributes</h3></p>
-            {{#each attributes}}
-                <p class="attribute-name col-xs-4">{{this.name}} - <span class="attribute-type">{{this.type}}</span></p>
-            {{/each}}
         </div>
         <hr>
-        <div class="row center text-center">
+
+        <div id="constructors" class="row center text-center">
             <p><h3>Constructors</h3></p>
             <p class="constructor-name">Test</p>
-                {{#each constructors}}
-                <div class="row">
-                    {{#each this.parameters}}
-                        <p class="col-xs-4 constructor-parameter">{{this.name}} {{this.type}}</p>
-                    {{/each}}
-                </div>
-                {{/each}}
-        </div><hr>
-        <div class="row center text-center">
+        </div>
+        <hr>
+
+        <div id="functions" class="row center text-center">
             <p>
                 <h3>Functions</h3>
             </p>
@@ -85,22 +71,21 @@ public static String getName(){
                     <span class="function-label">Access:</span> <span class="function-name">{{this.access}}</span><br>
                 </div>
             {{/each}}
-        </div><hr>
-        <div class="row center text-center">
+        </div>
+        <hr>
+
+        <div id="variables" class="row center text-center">
             <h3>Variables</h3>
             {{#each _main.variables}}
             <div class="row">
                 <p>{{this.name}}</p>
                 <p style="font-size:130%;color:red;">{{this.type}}</p>
-                <p>Value</p>
-                <div class="bar_group__bar thin" label="Vuaxhall Corsa" show_values="true" unit="mpg" value="343"></div>
-                <div class="bar_group__bar thin" label="Toyota Celica" show_values="true" unit="mpg" value="235"></div>
-                <div class="bar_group__bar thin" label="Landrover" show_values="true" unit="mpg" value="675"></div>
-                <div class="bar_group__bar thin" label="Peagueot 106" show_values="true" unit="mpg" value="456"></div>
-                <div class="bar_group__bar thin" label="Lawnmower" show_values="true" unit="mpg" value="245"></div>
+                <div class="ldBar" data-min="0" data-max="10" data-value={{this.value}}></div>
             </div>
             {{/each}}
         </div>
+
+        <button id="next" class="btn btn-success"><i class="fas fa-arrow-right"></i></button>
     <p>{{ error }}</p>
     </div>
 </div>
