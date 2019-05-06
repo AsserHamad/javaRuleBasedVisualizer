@@ -7,17 +7,17 @@
 </style>
 <div class="container container-fluid">
 
-<div class="col-xs-6">
+<div class="col-xs-4">
     <p class="titles">public class Test{</p>
 
     <form>
         <i>//Attribute Declarations</i><br>
-        <textarea name="attributes" placeholder="Add your attribute declarations here" rows="2" cols="50">
+        <textarea id="t_attributes" name="attributes" placeholder="Add your attribute declarations here" rows="2" cols="30">
 int age;
 String name;
         </textarea><br>
         <i>//Constructors</i><br>
-        <textarea name="constructors" placeholder="Add your constructors here" rows="7" cols="50">
+        <textarea id="t_constructors" name="constructors" placeholder="Add your constructors here" rows="7" cols="30">
 public Test(int age, String name){
     this.age = age;
     this.name = name;
@@ -27,7 +27,7 @@ private Test(int age){
 }
         </textarea><br>
         <i>//Functions</i><br>
-        <textarea name="functions" placeholder="Add your functions here" rows="7" cols="50">
+        <textarea id="t_functions" name="functions" placeholder="Add your functions here" rows="7" cols="30">
 public int getAge(){
     return this.age;
 }
@@ -36,7 +36,7 @@ public static String getName(){
 }
         </textarea><br>
         <p class="titles">public static void main(String[] args){</p>
-        <textarea name="main" placeholder="This is your playground, test around here" rows="3" cols="50">
+        <textarea id="t_main" name="main" placeholder="This is your playground, test around here" rows="3" cols="30">
 int x = 1;
 int y = 2;
 Test test = new Test(x,y);
@@ -47,7 +47,7 @@ Test test = new Test(x,y);
     </form>
 </div>
 
-    <div class="col-xs-6">
+    <div class="col-xs-4">
         <div id="attributes" class="row center text-center">
             <p><h3>Attributes</h3></p>
         </div>
@@ -63,14 +63,6 @@ Test test = new Test(x,y);
             <p>
                 <h3>Functions</h3>
             </p>
-            {{#each functions}}
-                <div class="col-xs-4 function text-left">
-                    <span class="function-label">Name:</span> <span class="function-name">{{this.name}}</span><br>
-                    <span class="function-label">Static:</span> <span class="function-name">{{this.static}}</span><br>
-                    <span class="function-label">Returns:</span> <span class="function-name">{{this.returnType}}</span><br>
-                    <span class="function-label">Access:</span> <span class="function-name">{{this.access}}</span><br>
-                </div>
-            {{/each}}
         </div>
         <hr>
 

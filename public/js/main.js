@@ -8,8 +8,8 @@ $(document).ready(() => {
             main : textareas[3].value
         };
         $.post('http://localhost:3000', values, (res) => {
-            $('textarea')[0].css('background-color', 'yellow');
             $('#next').click(() => {
+                $('#t_attributes').css('background-color', 'yellow');
                 $("#next").off("click");
                 $('#attributes').css('display', 'inline');
                 showAttributes(res, 0);
@@ -30,6 +30,8 @@ function showAttributes(res, count){
             showAttributes(res, count+1);
         });
     } else {
+        $('#t_attributes').css('background-color', 'white');
+        $('#t_constructors').css('background-color', 'yellow');
         $('#constructors').css('display', 'inline');
         $('#next').click(() => {
             $("#next").off("click");
@@ -54,17 +56,76 @@ function showConstructors(res, count){
             showConstructors(res, count+1);
         });
     } else {
+        $('#t_constructors').css('background-color', 'white');
+        $('#t_functions').css('background-color', 'yellow');
+        $('#functions').css('display', 'inline');
         $('#next').click(() => {
             $("#next").off("click");
-            showConstructors(res, 0);
+            showFunctions(res, 0);
         });
     }
 }
 
-// {{#each constructors}}
-// <div class="row">
-//     {{#each this.parameters}}
-//         <p class="col-xs-4 constructor-parameter">{{this.name}} {{this.type}}</p>
-//     {{/each}}
+
+function showFunctions(res, count) {
+    let functions = res.functions;
+    if (count != functions.length) {
+        const func = functions[count];
+        let iter = '<div class="col-xs-4 function text-left">';
+        iter += `
+        <span class="function-label">Name:</span> <span class="function-name">${func.name}</span><br>
+            <span class="function-label">Static:</span> <span class="function-name">${func.static}</span><br>
+            <span class="function-label">Returns:</span> <span class="function-name">${func.returnType}</span><br>
+            <span class="function-label">Access:</span> <span class="function-name">${func.access}</span><br>
+            `;
+        iter += '</div>';
+        let html = `${$('#functions').html()} ${iter}`;
+        $('#functions').html(html);
+        $('#next').click(() => {
+            $("#next").off("click");
+            showFunctions(res, count + 1);
+        });
+    } else {
+        $('#t_constructors').css('background-color', 'white');
+        $('#t_functions').css('background-color', 'yellow');
+        $('#next').click(() => {
+            $("#next").off("click");
+            showVariables(res, 0);
+        });
+    }
+}
+
+function showVariables(res, count) {
+    // let variables = res.variables;
+    // if (count != variables.length) {
+    //     const constructor = constructors[count];
+    //     let iter = "";
+    //     for (let param of constructor.parameters) {
+    //         iter += `<p class="col-xs-4 constructor-parameter">${param.name} ${param.type}</p>`;
+    //     }
+    //     let html = `${$('#constructors').html()}
+    //     <div class="row">${iter}</div>`;
+    //     $('#constructors').html(html);
+    //     $('#next').click(() => {
+    //         $("#next").off("click");
+    //         showConstructors(res, count + 1);
+    //     });
+    // } else {
+    //     $('#t_constructors').css('background-color', 'white');
+    //     $('#t_functions').css('background-color', 'yellow');
+    //     $('#functions').css('display', 'inline');
+    //     $('#next').click(() => {
+    //         $("#next").off("click");
+    //         showFunctions(res, 0);
+    //     });
+    // }
+}
+
+// {{#each functions}}
+// <div class="col-xs-4 function text-left">
+    // <span class="function-label">Name:</span> <span class="function-name">{{this.name}}</span><br>
+    // <span class="function-label">Static:</span> <span class="function-name">{{this.static}}</span><br>
+    // <span class="function-label">Returns:</span> <span class="function-name">{{this.returnType}}</span><br>
+    // <span class="function-label">Access:</span> <span class="function-name">{{this.access}}</span><br>
 // </div>
 // {{/each}}
