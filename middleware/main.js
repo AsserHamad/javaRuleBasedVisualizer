@@ -10,26 +10,58 @@ function Variable(name, type, value) {
     this.value = value;
 }
 
-// function Sequence();
+function Sequence(type, details){
+    this.type = type;
+    this.details = details;
+};
 
 const Main = (main, atts, consts, funcs) => {
     attributes = atts, constructors = consts, functions = funcs;
+    handleLogic(main);
+    let ifs = main.match(/if\(.+\){.*}/g);
+    let whiles = main.match(/while\(.+\){.*}/g);
+    let fors = main.match(/for\(.+\){.*}/g);
     let lines = main.split(';');
     
-    let count = 0;
-    for (let line of lines) {
-        count++;
-        switch (getTypeOfQuery(line)){
-            case 'declaration': declarationHandler(line); break;
-            case 'func': functionHandler(line); break;
-            case 'staticFunc': staticFunctionHandler(line);break;
-            case 'assignment': assignmentHandler(line); break;
-        }
-    }
+    // let count = 0;
+    // for (let line of lines) {
+    //     count++;
+    //     switch (getTypeOfQuery(line)){
+    //         case 'declaration': declarationHandler(line); break;
+    //         case 'func': functionHandler(line); break;
+    //         case 'staticFunc': staticFunctionHandler(line);break;
+    //         case 'assignment': assignmentHandler(line); break;
+    //     }
+    // }
     return {
         variables
     }
 };
+
+function handleLogic(statement){
+    let ifs = statement.match(/if\([a-zA-Z0-9+-=\(\) !]*\)/g);
+    for(let _if of ifs){
+        console.log('---------------------------------------IF-----------------------------------------')
+        console.log(_if);
+        let condition = _if.substring(3, _if.length-1);
+        console.log('condition', condition);
+        let startIndex = statement.indexOfEnd(_if), counter = 0, endIndex;
+        for(let i = startIndex; i < statement.length; i++){
+            if(statement[i] == '{')
+                counter++;
+            else if(statement[i] == '}')
+                counter--;
+            if(counter == 0){
+                endIndex = i;
+                break;
+            }
+        }
+        console.log('start index', startIndex, ' endIndex', endIndex);
+        let block = statement.substring(startIndex+1, endIndex);
+        console.log('block', block);
+        console.log(statement.replace(`${_if}{${block}}`, `[if,${condition},${block}]`));
+    }
+}
 
 //int x = 1;
 //TODO: Split by space with no quotes around it
@@ -75,12 +107,10 @@ function functionHandler(line) {
 
 function staticFunctionHandler(line) {
     console.log('static function called');
-
 }
 
 function assignmentHandler(line) {
     console.log('assignment called');
-
 }
 
 function getTypeOfQuery(line){
@@ -116,6 +146,11 @@ function getParamType(param){
         return 'int';
     if(param.match(/[a-zA-Z_][a-zA-Z0-9_]*/))
         return 'variable';
+}
+
+String.prototype.indexOfEnd = function(string) {
+    var io = this.indexOf(string);
+    return io == -1 ? -1 : io + string.length;
 }
 
 module.exports = Main;

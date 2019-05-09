@@ -17,23 +17,22 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    console.log(req.body);
     const atts = req.body.attributes.replace(/\r|\n/g, '');
     const consts = req.body.constructors.replace(/\r|\n/g, '');
     const funcs = req.body.functions.replace(/\r|\n/g, '');
-    const main = req.body.main.replace(/\r|\n/g, '');
+    const _main = req.body.main.replace(/\r|\n/g, '');
 
     let attributes = Attributes(atts);
     let constructors = Constructors(consts);
     let functions = Functions(funcs);
-    let _main = Main(main, attributes, constructors, functions);
+    let main = Main(_main, attributes, constructors, functions);
     
     res.json({
         variables,
         attributes,
         constructors,
         functions,
-        _main
+        main
     });
 });
 
