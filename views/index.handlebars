@@ -37,15 +37,19 @@ public static String getName(){
         </textarea><br>
         <p class="titles">public static void main(String[] args){</p>
         <textarea id="t_main" name="main" placeholder="This is your playground, test around here" rows="3" cols="30">
-int x = 1;
+int x = 3;
 int y = 2;
+x = 1;
 if(x == 1){
-    if(y == 3){
-        x = 3;
+    y = 3;
+}
+while(y == 3){
+    if(x < 5){
+        x = x + 1;
     }
 }
-if(x != 1){
-    y = 3;
+for(int i = 1; i < 20; i++){
+    x = i;
 }
         </textarea><br>
         <p class="titles">}<br>
