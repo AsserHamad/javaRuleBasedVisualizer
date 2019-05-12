@@ -8,6 +8,7 @@ $(document).ready(() => {
             main : textareas[3].value
         };
         $.post('http://localhost:3000', values, (res) => {
+            console.log(res);
             $('#next').click(() => {
                 $('#t_attributes').css('background-color', 'yellow');
                 $("#next").off("click");

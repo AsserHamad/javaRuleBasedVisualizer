@@ -58,37 +58,37 @@ for(int i = 1; i < 20; i++){
     </form>
 </div>
 
-    <div class="col-xs-4">
-        <div id="attributes" class="row center text-center">
-            <p><h3>Attributes</h3></p>
-        </div>
-        <hr>
-
-        <div id="constructors" class="row center text-center">
-            <p><h3>Constructors</h3></p>
-            <p class="constructor-name">Test</p>
-        </div>
-        <hr>
-
-        <div id="functions" class="row center text-center">
-            <p>
-                <h3>Functions</h3>
-            </p>
-        </div>
-        <hr>
-
-        <div id="variables" class="row center text-center">
-            <h3>Variables</h3>
-            {{#each _main.variables}}
-            <div class="row">
-                <p>{{this.name}}</p>
-                <p style="font-size:130%;color:red;">{{this.type}}</p>
-                <div class="ldBar" data-min="0" data-max="10" data-value={{this.value}}></div>
-            </div>
-            {{/each}}
-        </div>
-
-        <button id="next" class="btn btn-success"><i class="fas fa-arrow-right"></i></button>
-    <p>{{ error }}</p>
+<div class="col-xs-4">
+    <div id="attributes" class="row center text-center">
+        <p><h3>Attributes</h3></p>
     </div>
+    <hr>
+
+    <div id="constructors" class="row center text-center">
+        <p><h3>Constructors</h3></p>
+        <p class="constructor-name">Test</p>
+    </div>
+    <hr>
+
+    <div id="functions" class="row center text-center">
+        <p>
+            <h3>Functions</h3>
+        </p>
+    </div>
+    <hr>
+
+    <div id="variables" class="row center text-center">
+        <h3>Variables</h3>
+        {{#each _main.variables}}
+        <div class="row">
+            <p>{{this.name}}</p>
+            <p style="font-size:130%;color:red;">{{this.type}}</p>
+            <div class="ldBar" data-min="0" data-max="10" data-value={{this.value}}></div>
+        </div>
+        {{/each}}
+    </div>
+
+    <button id="next" class="btn btn-success"><i class="fas fa-arrow-right"></i></button>
+    <p>{{ error }}</p>
+</div>
 </div>
