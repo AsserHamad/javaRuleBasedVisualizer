@@ -1,3 +1,5 @@
+let handleLogic = require('./logic');
+
 function Parameter(name, type) {
     this.name = name;
     this.type = type;
@@ -52,17 +54,18 @@ function getFunctions(funcs) {
                 }
                 i++;
             }
-            let code = (index != end) ? substr.substring(index, end-1) : '';
+            let code = (index != end) ? substr.substring(index, end) : '';
             functions.push(new Function(
                     funcElements.name,
                     funcElements.access,
                     funcElements.parameters,
                     funcElements.returnType,
                     funcElements.static,
-                    code
+                    handleLogic(code, [])
                 ));
         }
 }
+
 
 //Function Stuff
 function indicesOfFunctions(string) {

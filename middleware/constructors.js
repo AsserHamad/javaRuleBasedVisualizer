@@ -1,3 +1,5 @@
+let handleLogic = require('./logic');
+
 function Parameter(name, type) {
     this.name = name;
     this.type = type;

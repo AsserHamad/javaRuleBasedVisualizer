@@ -91,42 +91,23 @@ function showFunctions(res, count) {
         $('#t_functions').css('background-color', 'yellow');
         $('#next').click(() => {
             $("#next").off("click");
-            showVariables(res, 0);
+            showMain(res, 0);
         });
     }
 }
 
-function showVariables(res, count) {
-    // let variables = res.variables;
-    // if (count != variables.length) {
-    //     const constructor = constructors[count];
-    //     let iter = "";
-    //     for (let param of constructor.parameters) {
-    //         iter += `<p class="col-xs-4 constructor-parameter">${param.name} ${param.type}</p>`;
-    //     }
-    //     let html = `${$('#constructors').html()}
-    //     <div class="row">${iter}</div>`;
-    //     $('#constructors').html(html);
-    //     $('#next').click(() => {
-    //         $("#next").off("click");
-    //         showConstructors(res, count + 1);
-    //     });
-    // } else {
-    //     $('#t_constructors').css('background-color', 'white');
-    //     $('#t_functions').css('background-color', 'yellow');
-    //     $('#functions').css('display', 'inline');
-    //     $('#next').click(() => {
-    //         $("#next").off("click");
-    //         showFunctions(res, 0);
-    //     });
-    // }
+function showMain(res, count) {
+    let main = res.main;
+    let currStatement = main.sequence[count];
+    switch(currStatement.type){
+        case 'declaration': declarationHandler(currStatement); break;
+        case 'assignment': assignmentHandler(currStatement); break;
+        case 'if': break;
+        case 'while': break;
+        case 'for': break;
+    }
+    $('#next').click(() => {
+        $("#next").off("click");
+        showMain(res, count + 1);
+    });
 }
-
-// {{#each functions}}
-// <div class="col-xs-4 function text-left">
-    // <span class="function-label">Name:</span> <span class="function-name">{{this.name}}</span><br>
-    // <span class="function-label">Static:</span> <span class="function-name">{{this.static}}</span><br>
-    // <span class="function-label">Returns:</span> <span class="function-name">{{this.returnType}}</span><br>
-    // <span class="function-label">Access:</span> <span class="function-name">{{this.access}}</span><br>
-// </div>
-// {{/each}}
