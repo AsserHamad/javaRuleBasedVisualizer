@@ -63,12 +63,12 @@ function getConstructors(consts) {
                 }
                 i++;
             }
-            let code = (index != end) ? substr.substring(index, end - 1) : '';
+            let code = (index != end) ? substr.substring(index, end) : '';
             constructors.push(new Constructor(
                 constrElements.name,
                 constrElements.access,
                 constrElements.parameters,
-                code
+                handleLogic(code, [])
             ));
         }
 }

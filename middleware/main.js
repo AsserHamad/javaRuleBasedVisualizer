@@ -1,11 +1,5 @@
 let handleLogic = require('./logic');
 
-let variables = [],
-    attributes = [],
-    constructors = [],
-    functions = [],
-    sequence = [];
-
 function Variable(name, type, value) {
     this.name = name;
     this.type = type;
@@ -18,12 +12,8 @@ function Sequence(type, details){
 };
 
 const Main = (main, atts, consts, funcs) => {
-    attributes = atts, constructors = consts, functions = funcs;
-    handleLogic(main, sequence);
-    console.log(JSON.stringify(sequence, null, 4));
     return {
-        variables,
-        sequence,
+        sequence: handleLogic(main, []),
         atts,
         consts,
         funcs

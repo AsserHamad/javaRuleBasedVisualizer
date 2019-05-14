@@ -3,8 +3,8 @@
 function handleLogic(statement, sequence){
     console.log(statement, sequence);
     //Declarations
-    if(statement.match(/^ *(int|String|double|float|Test) [a-zA-Z0-9_] = [a-zA-Z0-9_ .\(\)]+;/i)){
-        let declaration = statement.match(/(int|String|double|float|Test) [a-zA-Z0-9_] = [a-zA-Z0-9_ .\(\)]+;/i)[0];
+    if(statement.match(/^ *(int|String|double|float|Test) [a-zA-Z0-9_]+ = [a-zA-Z0-9_ .\(\)]+;/i)){
+        let declaration = statement.match(/(int|String|double|float|Test) [a-zA-Z0-9_]+ = [a-zA-Z0-9_ .\(\)]+;/i)[0];
         sequence.push({
             type: 'declaration',
             declaration
@@ -12,8 +12,8 @@ function handleLogic(statement, sequence){
         statement = statement.replace(declaration, '');
     }
     //Assignments
-    else if(statement.match(/^ *[a-zA-Z0-9_] = [a-zA-Z0-9_ +-/*"'.\(\)]+;/i)){
-        let assignment = statement.match(/[a-zA-Z0-9_] = [a-zA-Z0-9_ +-/*"'.\(\)]+;/i)[0]
+    else if(statement.match(/^ *[a-zA-Z0-9._]+ = [a-zA-Z0-9_ +-/*"'.\(\)]+;/i)){
+        let assignment = statement.match(/[a-zA-Z0-9._]+ = [a-zA-Z0-9_ +-/*"'.\(\)]+;/i)[0]
         sequence.push({
             type: 'assignment',
             assignment
@@ -21,8 +21,8 @@ function handleLogic(statement, sequence){
         statement = statement.replace(assignment, '');
     }
     //If Conditions
-    else if(statement.match(/^ *if\([a-zA-Z0-9+-=\(\) !]*\)/i)){
-        let _if = statement.match(/if\([a-zA-Z0-9+-=\(\) !]*\)/i)[0];
+    else if(statement.match(/^ *if\([a-zA-Z0-9.+-=\(\) !]*\)/i)){
+        let _if = statement.match(/if\([a-zA-Z0-9.+-=\(\) !]*\)/i)[0];
         let condition = _if.substring(3, _if.length-1);
         let startIndex = statement.indexOfEnd(_if), counter = 0, endIndex;
         for(let i = startIndex; i < statement.length; i++){
@@ -43,7 +43,6 @@ function handleLogic(statement, sequence){
             condition,
             block
         };
-        console.log('statement now', statement);
         //Else Condition
         if(statement.match(/^ *else */i)){
             console.log('ELSE!!!!');
@@ -67,8 +66,8 @@ function handleLogic(statement, sequence){
         sequence.push(obj);
     }
     //While loop
-    else if(statement.match(/^ *while\([a-zA-Z0-9+-=\(\) !]*\)/i)){
-        let _while = statement.match(/while\([a-zA-Z0-9+-=\(\) !]*\)/i)[0];
+    else if(statement.match(/^ *while\([a-zA-Z0-9.+-=\(\) !]*\)/i)){
+        let _while = statement.match(/while\([a-zA-Z0-9.+-=\(\) !]*\)/i)[0];
         let condition = _while.substring(6, _while.length-1);
         let startIndex = statement.indexOfEnd(_while), counter = 0, endIndex;
         for(let i = startIndex; i < statement.length; i++){
@@ -91,8 +90,8 @@ function handleLogic(statement, sequence){
         statement = statement.replace(statement.substring(0, endIndex+1), '');
     }
     //For loop
-    else if(statement.match(/^ *for\([a-zA-Z0-9+-=\(\) ;!]*\)/i)){
-        let _for = statement.match(/for\([a-zA-Z0-9+-=\(\) !]*\)/i)[0];
+    else if(statement.match(/^ *for\([a-zA-Z0-9.+-=\(\) ;!]*\)/i)){
+        let _for = statement.match(/for\([a-zA-Z0-9.+-=\(\) !]*\)/i)[0];
         let condition = _for.substring(4, _for.length-1).split(';');
         let init = condition[0], cond = condition[1], incr = condition[2];
         let startIndex = statement.indexOfEnd(_for), counter = 0, endIndex;
