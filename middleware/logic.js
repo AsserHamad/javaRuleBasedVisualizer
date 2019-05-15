@@ -3,8 +3,8 @@
 function handleLogic(statement, sequence){
     console.log(statement, sequence);
     //Declarations
-    if(statement.match(/^ *(int|String|double|float|Test) [a-zA-Z0-9_]+ = [a-zA-Z0-9_ .\(\)]+;/i)){
-        let declaration = statement.match(/(int|String|double|float|Test) [a-zA-Z0-9_]+ = [a-zA-Z0-9_ .\(\)]+;/i)[0];
+    if(statement.match(/^ *(int|String|float|boolean|Test) [a-zA-Z0-9_]+ = [a-zA-Z0-9_"' +=><!-\/\*.\(\)]+;/i)){
+        let declaration = statement.match(/(int|String|float|boolean|Test) [a-zA-Z0-9_]+ = [a-zA-Z0-9_"' +=><!-\/\*.\(\)]+;/i)[0];
         sequence.push({
             type: 'declaration',
             declaration
@@ -12,8 +12,8 @@ function handleLogic(statement, sequence){
         statement = statement.replace(declaration, '');
     }
     //Assignments
-    else if(statement.match(/^ *[a-zA-Z0-9._]+ = [a-zA-Z0-9_ +-/*"'.\(\)]+;/i)){
-        let assignment = statement.match(/[a-zA-Z0-9._]+ = [a-zA-Z0-9_ +-/*"'.\(\)]+;/i)[0]
+    else if(statement.match(/^ *[a-zA-Z0-9._]+ = [a-zA-Z0-9_ +=><!-\/\*"'.\(\)]+;/i)){
+        let assignment = statement.match(/[a-zA-Z0-9._]+ = [a-zA-Z0-9_ +=><!-/*"'.\(\)]+;/i)[0]
         sequence.push({
             type: 'assignment',
             assignment

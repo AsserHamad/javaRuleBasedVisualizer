@@ -1,0 +1,12 @@
+.rule-btn{
+    padding: 0% 0% !important;
+    background-color: transparent !important;
+    color: rgb(62, 170, 241) !important;
+    border: none !important;
+    margin-left: 2% !important;
+    transition-duration: 0.2s;
+}
+.rule-btn:hover{
+    border: none !important;
+    box-shadow: 0px 0px 10px rgb(62, 170, 241) !important;
+}

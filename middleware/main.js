@@ -1,11 +1,5 @@
 let handleLogic = require('./logic');
 
-function Variable(name, type, value) {
-    this.name = name;
-    this.type = type;
-    this.value = value;
-}
-
 function Sequence(type, details){
     this.type = type;
     this.details = details;

@@ -5,7 +5,24 @@
         color: #3d3d3d;
     }
 </style>
+
 <div class="container container-fluid">
+{{!-- Modal --}}
+<!-- Trigger the modal with a button -->
+<button id="modalbtn" type="button" class="btn btn-info btn-lg" data-toggle="modal" style="display: none;" data-target="#myModal">Open Modal</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4 id="modal-title" class="text-center">Rules</h4>
+        <p id="modal-text">lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <button id="next" class="btn btn-success"><i class="fas fa-arrow-right"></i></button>
 
@@ -13,12 +30,12 @@
     <p class="titles">public class Test{</p>
 
     <form>
-        <i>//Attribute Declarations</i><br>
+        <i>//Attribute Declarations</i> <a id="rule-attributes" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
         <textarea id="t_attributes" name="attributes" placeholder="Add your attribute declarations here" rows="2" cols="30">
 int age;
 String name;
         </textarea><br>
-        <i>//Constructors</i><br>
+        <i>//Constructors</i> <a id="rule-constructors" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
         <textarea id="t_constructors" name="constructors" placeholder="Add your constructors here" rows="7" cols="30">
 public Test(int age, String name){
     this.age = age;
@@ -28,7 +45,7 @@ private Test(int age){
     this.age = age;
 }
         </textarea><br>
-        <i>//Functions</i><br>
+        <i>//Functions</i> <a id="rule-functions" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
         <textarea id="t_functions" name="functions" placeholder="Add your functions here" rows="7" cols="30">
 public int getAge(){
     return this.age;
@@ -38,10 +55,14 @@ public static String getName(){
 }
         </textarea><br>
         <p class="titles">public static void main(String[] args){</p>
+        <i>//Main method</i> <a id="rule-main" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
+        
         <textarea id="t_main" name="main" placeholder="This is your playground, test around here" rows="3" cols="30">
 int x = 3;
-int y = 2;
-x = 1;
+int y = 2 + 3 * x - 1;
+String z = "ababab";
+y = 1;
+boolean a = x == 3;
 if(x == 1){
     y = 3;
 }
@@ -100,10 +121,12 @@ for(int i = 1; i < 20; i++){
             <h1>Logic</h1>
         </p>
         <p id="statement"></p>
-        <p id="subtitle"></p>
-        <div id="data">
-
-        </div>
+        <p id="subtitle"></p><hr>
+        {{!-- <p class="text-left"><h3>Numbers</h3></p> --}}
+        <div id="data_numbers" class="row"></div><hr>
+        <div id="data_bools" class="row"></div><hr>
+        {{!-- <p class="text-left"><h3>Strings</h3></p> --}}
+        <div id="data_strings" class="row"></div><hr>
     </div>
 </div>
 </div>

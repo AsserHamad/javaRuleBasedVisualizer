@@ -80,9 +80,6 @@ function getProperFormat(value, type) {
         case 'float':
             return parseFloat(value);
             break;
-        case 'double':
-            return parseFloat(value);
-            break;
         case 'boolean':
             return (value == 'true') ? true : false;
             break;

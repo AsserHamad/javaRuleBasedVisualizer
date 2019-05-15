@@ -1,6 +1,5 @@
 const identifierss = {
     int: '^[0-9]+$',
-    double: '^[0-9]+(\.[0-9]+)?$',
     float: '^[0-9]+(\.[0-9]+)?$',
     String: '^"([0-9a-zA-Z]*[-!$%^&*#%^()_+|~=`@{}:";<>?,./]*)*"$',
     boolean: '^true|false$'

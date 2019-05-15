@@ -69,7 +69,7 @@ function getFunctions(funcs) {
 
 //Function Stuff
 function indicesOfFunctions(string) {
-    let indices = string.match(/(public|private|default|protected) +(static +)?(int|String|double|float|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/g);
+    let indices = string.match(/(public|private|default|protected) +(static +)?(int|String|float|boolean|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/g);
     if (indices != null)
         for (let i = 0; i < indices.length; i++) {
             indices[i] = string.indexOf(indices[i]);
@@ -79,7 +79,7 @@ function indicesOfFunctions(string) {
 
 //public static void main(String[] args)
 function dissectFunctionConstructor(string) {
-    let phrases = string.match(/(public|private|default|protected) +(static +)?(int|String|double|float|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/)[0].split(' ');
+    let phrases = string.match(/(public|private|default|protected) +(static +)?(int|String|float|boolean|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/)[0].split(' ');
     let access = 'public',
         static = false,
         returnType, name;
@@ -87,7 +87,7 @@ function dissectFunctionConstructor(string) {
     phrases.map((phrase) => {
         (phrase.match(/public|private|default|protected/i)) ? access = phrase: null;
         (phrase.match(/static/i)) ? static = true: null;
-        (phrase.match(/int|String|double|float|void/i)) ? returnType = phrase: null;
+        (phrase.match(/int|String|float|void/i)) ? returnType = phrase: null;
     })
     name = phrases[phrases.length - 1];
     return {

@@ -1,1 +1,1 @@
-module.exports = ['int', 'double', 'float', 'String', 'boolean'];
+module.exports = ['int', 'float', 'String', 'boolean'];
