@@ -31,12 +31,12 @@
 
     <form>
         <i>//Attribute Declarations</i> <a id="rule-attributes" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
-        <textarea id="t_attributes" name="attributes" placeholder="Add your attribute declarations here" rows="2" cols="30">
+        <textarea class="form-control" id="t_attributes" name="attributes" placeholder="Add your attribute declarations here" style="height: 50px">
 int age;
 String name;
         </textarea><br>
         <i>//Constructors</i> <a id="rule-constructors" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
-        <textarea id="t_constructors" name="constructors" placeholder="Add your constructors here" rows="7" cols="30">
+        <textarea class="form-control" id="t_constructors" name="constructors" placeholder="Add your constructors here" style="height: 150px">
 public Test(int age, String name){
     this.age = age;
     this.name = name;
@@ -46,23 +46,30 @@ private Test(int age){
 }
         </textarea><br>
         <i>//Functions</i> <a id="rule-functions" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
-        <textarea id="t_functions" name="functions" placeholder="Add your functions here" rows="7" cols="30">
+        <textarea class="form-control" id="t_functions" name="functions" placeholder="Add your functions here" style="height: 130px">
 public int getAge(){
     return this.age;
 }
-public static String getName(){
-    return this.name;
+public static int sum(int x, int y, int z){
+    return x + y + z;
+}
+public static int sum(int x, int y){
+    return x + y;
+}
+public static int sum(int x){
+    return x;
 }
         </textarea><br>
         <p class="titles">public static void main(String[] args){</p>
         <i>//Main method</i> <a id="rule-main" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
         
-        <textarea id="t_main" name="main" placeholder="This is your playground, test around here" rows="3" cols="30">
-int x = 3;
+        <textarea class="form-control" id="t_main" name="main" placeholder="This is your playground, test around here" style="height: 340px">
+int x = (3 + 1) * (2 * (7 * sum(1, 1)));
 int y = 2 + 3 * x - 1;
+sum(1,sum(1,sum(x,y)));
 String z = "ababab";
 y = 1;
-boolean a = x == 3;
+boolean a = x == 56 && (false || (true || false) && true);
 if(x == 1){
     y = 3;
 }

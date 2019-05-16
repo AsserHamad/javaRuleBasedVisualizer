@@ -21,6 +21,19 @@ const Functions = (funcs) => {
     getFunctions(funcs);
     return functions;
 }
+
+//Function Stuff
+function indicesOfFunctions(string) {
+    let indices = string.match(/(public|private|default|protected) +(static +)?(int|String|float|boolean|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/g);
+    let ind = 0;
+    if (indices != null)
+        for (let i = 0; i < indices.length; i++) {
+            indices[i] = string.indexOf(indices[i], ind);
+            ind = indices[i] + 1;
+        }
+    return indices;
+}
+
 function getFunctions(funcs) {
     //Get Functions
     let indices = indicesOfFunctions(funcs);
@@ -66,17 +79,6 @@ function getFunctions(funcs) {
         }
 }
 
-
-//Function Stuff
-function indicesOfFunctions(string) {
-    let indices = string.match(/(public|private|default|protected) +(static +)?(int|String|float|boolean|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/g);
-    if (indices != null)
-        for (let i = 0; i < indices.length; i++) {
-            indices[i] = string.indexOf(indices[i]);
-        }
-    return indices;
-}
-
 //public static void main(String[] args)
 function dissectFunctionConstructor(string) {
     let phrases = string.match(/(public|private|default|protected) +(static +)?(int|String|float|boolean|void)([])? +[a-zA-Z_][a-zA-Z0-9]*/)[0].split(' ');
@@ -112,7 +114,7 @@ function getParameters(string) {
     params.map((param) => {
         param = param.match(/[a-zA-Z]+ [a-zA-Z_0-9]/)[0];
         param = param.split(' ');
-        returnParams.push(new Parameter(param[0], param[1]));
+        returnParams.push(new Parameter(param[1], param[0]));
     });
     return returnParams;
 }

@@ -2,6 +2,13 @@
     font-family: Roboto;
 }
 
+textarea{
+    overflow: hidden !important;
+    resize: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important; 
+}
+
 /* Next Button */
 #next{
     position: fixed;

@@ -6,8 +6,10 @@ function Sequence(type, details){
 };
 
 const Main = (main, atts, consts, funcs) => {
+    let sequence = handleLogic(main, [])
+    console.log(sequence);
     return {
-        sequence: handleLogic(main, []),
+        sequence,
         atts,
         consts,
         funcs

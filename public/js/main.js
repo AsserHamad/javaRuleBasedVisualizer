@@ -13,14 +13,19 @@ $(document).ready(() => {
                 $('#t_attributes').css('background-color', 'yellow');
                 $("#next").off("click");
                 $('#attributes').css('display', 'inline');
+                attributes = res.attributes;
+                constructors = res.constructors;
+                functions = res.functions;
+                stfunctions = functions.filter((func) => func.static);
+                main = res.main;
                 showAttributes(res, 0);
             });
         });
     });
+    $('#submit').click();
 });
 
 function showAttributes(res, count){
-    const attributes = res.attributes;
     if(count != attributes.length){
         const attribute = attributes[count];
         let html = `${$('#attributes').html()}
@@ -42,7 +47,6 @@ function showAttributes(res, count){
 }
 
 function showConstructors(res, count){
-    let constructors = res.constructors;
     if(count != constructors.length){
         const constructor = constructors[count];
         let iter = "";
@@ -67,9 +71,7 @@ function showConstructors(res, count){
     }
 }
 
-
 function showFunctions(res, count) {
-    let functions = res.functions;
     if (count != functions.length) {
         const func = functions[count];
         let iter = '<div class="col-xs-4 function text-left">';
@@ -89,19 +91,17 @@ function showFunctions(res, count) {
     } else {
         $('#t_constructors').css('background-color', 'white');
         $('#t_functions').css('background-color', 'yellow');
-        $('#next').click(() => {
-            $("#next").off("click");
-            showMain(res, 0);
-        });
+        $("#next").off("click");
+        showMain(res, 0);
     }
 }
 
 function showMain(res, count) {
-    let main = res.main;
     let currStatement = main.sequence[count];
     switch(currStatement.type){
         case 'declaration': declarationHandler(currStatement); break;
         case 'assignment': assignmentHandler(currStatement); break;
+        case 'stfunc' : staticfunctionHandler(currStatement); break;
         case 'if': break;
         case 'while': break;
         case 'for': break;

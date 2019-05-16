@@ -5,7 +5,7 @@ function declarationHandler(statement){
     for(let i = 3; i < declaration.length; i++){
         value += declaration[i];
     }
-    value = value.substring(0, value.length-1);
+    value = statement.declaration.replace(`${type} ${name} = `, '');
     console.log(`value ${value}`)
     let variable;
     switch(type){

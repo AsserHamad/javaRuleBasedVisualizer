@@ -1,7 +1,7 @@
 function assignmentHandler(statement){
     let assignment = statement.assignment;
     assignment = assignment.split(' ');
-    let name = assignment[0], value = assignment[2].substring(0, assignment[2].length-1);
+    let name = assignment[0], value = assignment[2];
     let variable = variables.filter((variable) => (variable.name == name))[0];
     value = evaluateValue(value);
     checkMinMax();

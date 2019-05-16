@@ -1,4 +1,5 @@
-let variables =  bars = [];
+let variables =  bars = attributes = constructors = functions = stfunctions = main = [];
+// let attributes = constructors = functions = stfunctions = main = []; 
 let min = max = 0;
 
 function Variable(name, type, value) {
@@ -28,7 +29,6 @@ function checkMinMax(){
     let vars = variables.filter((variable) => variable.type == 'int' || variable.type == 'float');
     for(let variable of vars)
         max = (variable.value > max) ? variable.value : max;
-    console.log(`max: ${max}`,)
 }
 
 function getRandomInt(max) {
@@ -36,41 +36,45 @@ function getRandomInt(max) {
 }
 
 function evaluateValue(argument){
-    console.log(`argument coming in ${argument}`)
+    console.log(`initial argument ${argument}`)
+    argument = evaluateParenthesisFirst(argument);
+    console.log(`argument after parenthesis ${argument}`)
     //Integer
-    if(argument.match(/^[0-9]+$/)){
-        return parseInt(argument.match(/^[0-9]+$/)[0]);
+    if(argument.match(/^ *[0-9]+ *$/)){
+        return parseInt(argument.match(/[0-9]+/)[0]);
     }
     //Float
-    else if(argument.match(/^[0-9]+\.[0-9]+$/)){
-        return parseFloat(argument.match(/^[0-9]+\.[0-9]+$/)[0]);
+    else if(argument.match(/^ *[0-9]+\.[0-9]+ *$/)){
+        return parseFloat(argument.match(/[0-9]+\.[0-9]+/)[0]);
     }
     //Boolean
-    else if(argument.match(/^true|false$/)){
-        return argument.match(/^true|false$/)[0] == 'true';
+    else if(argument.match(/^ *(true|false) *$/)){
+        return argument.match(/true|false/)[0] == 'true';
     }
     //String
     else if(argument.match(/^"[a-zA-Z0-9+=-_ '\/\\]"/)){
         return argument.substring(1, value.length-2);
     }
     //Variable
-    else if(argument.match(/^[a-zA-Z_][a-zA-Z_0-9]*$/)){
+    else if(argument.match(/^ *[a-zA-Z_][a-zA-Z_0-9]* *$/)){
         for(let variable of variables){
-            if(variable.name == argument.match(/^[a-zA-Z_][a-zA-Z_0-9]*$/)[0])
+            if(variable.name == argument.match(/[a-zA-Z_][a-zA-Z_0-9]*/)[0])
                 return variable.value;
         }
     }
-    //TODO: Functions
+    //Static Functions
+    else if(argument.match(/^ *[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.+-=/,\(\)]*\) *$/)){
+        return staticfunctionHandler({type: 'stfunc', call: argument.match(/[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.+-=/,\(\)]*\)/)[0]});
+    }
     //Operation
     else {
-        let arguments = argument.split(/ *\+|-|\*|\/|==|>=|<=|!= */);
-        console.log(argument)
+        let arguments = argument.split(/ *\+|-|\*|\/|==|>=|<=|!=|\|\||&& */);
         for(let i = 0; i < argument.slength; i++){
             arguments[i] = evaluateValue(arguments[i]);
         }
-        let operands = argument.match(/\+|-|\*|\/|==|>=|<=|!=/g);
-        console.log('argument: ', argument, arguments, operands)
+        let operands = argument.match(/\+|-|\*|\/|==|>=|<=|!=|\|\||&&/g);
         let total;
+        console.log('operands', operands, 'argument', argument)
         for(let i = 0; i < operands.length; i++){
             if(i == 0) total = evaluateValue(arguments[i]);
             switch(operands[i]){
@@ -78,12 +82,49 @@ function evaluateValue(argument){
                 case '-': total -= evaluateValue(arguments[i+1]); break;
                 case '*': total *= evaluateValue(arguments[i+1]); break;
                 case '/': total /= evaluateValue(arguments[i+1]); break;
+                case '>': total /= evaluateValue(arguments[i+1]); break;
+                case '<': total /= evaluateValue(arguments[i+1]); break;
                 case '==': total = total == evaluateValue(arguments[i+1]); break;
                 case '!=': total = total != evaluateValue(arguments[i+1]); break;
                 case '>=': total = total >= evaluateValue(arguments[i+1]); break;
                 case '<=': total = total <= evaluateValue(arguments[i+1]); break;
+                case '&&': total = total && evaluateValue(arguments[i+1]); break;
+                case '||': total = total || evaluateValue(arguments[i+1]); break;
             }
         }
         return total;
     }
+}
+
+function evaluateParenthesisFirst(argument){
+    if(!argument.match(/(^\()| \(/))
+    return argument;
+    
+    let index = argument.search(/(^\()| \(/i);
+    if(argument[index] == ' ')
+        index++;
+    
+    count = 0;
+    statement = "";
+    for(let i = index; i < argument.length; i++){
+        
+        console.log(`argument: ${argument}, argument[${i}]: ${argument[i]}, count: ${count}`)
+        if(argument[i] == '('){
+            count++;
+        }
+        else
+        if(argument[i] == ')'){
+            count--;
+        }
+
+        if(count == 0){
+            statement = argument.substring(index+1, i);
+            argument = argument.replace(argument.substring(index, i+1), evaluateValue(statement));
+            console.log(`ARGUMENT ${argument}`)
+            argument = evaluateParenthesisFirst(argument);
+            break;
+        }
+    }
+    console.log(`final parenthesis argument`, argument)
+    return argument;
 }

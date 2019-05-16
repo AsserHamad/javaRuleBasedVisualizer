@@ -23,9 +23,11 @@ const Constructors = (consts) => {
 //Constructor Work
 function indicesOfConstructors(string) {
     let indices = string.match(/\s*(public|private|default|protected) +[a-zA-Z_]+[a-zA-Z0-9]*\([a-zA-Z, ]*\)/g);
+    let ind = 0;
     if (indices != null)
         for (let i = 0; i < indices.length; i++) {
-            indices[i] = string.indexOf(indices[i]);
+            indices[i] = string.indexOf(indices[i], ind);
+            ind = indices[i] + 1;
         }
     return indices;
 }
