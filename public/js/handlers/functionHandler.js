@@ -1,5 +1,21 @@
+// function funcHTML(){
+//     let rand = Math.floor(Math.random()*100000);
+//     return {
+//         rand,
+//         html: '<div id="functionCall_' + rand + '">\
+//                     <p>\
+//                         <h1>Function Call</h1>\
+//                     </p>\
+//                     <p id="function_statement' + rand + '"></p>\
+//                     <p id="function_subtitle' + rand + '"></p><hr>\
+//                     <div id="function_numbers' + rand + '" class="row"></div><hr>\
+//                     <div id="function_bools' + rand + '" class="row"></div><hr>\
+//                     <div id="function_strings' + rand + '" class="row"></div><hr>\
+//                 </div>'
+//     }
+// }
+
 function functionHandler(statement){
-    console.log('func', statement);
     // let declaration = statement.declaration;
     // declaration = declaration.split(' ');
     // let type = declaration[0], name = declaration[1], value = "";
@@ -7,7 +23,6 @@ function functionHandler(statement){
     //     value += declaration[i];
     // }
     // value = value.substring(0, value.length-1);
-    // console.log(`value ${value}`)
     // let variable;
     // switch(type){
     //     case 'int': value = evaluateValue(value); checkMinMax(); variable = new Variable(name, type, value); addNumber(variable); break;
@@ -40,11 +55,23 @@ function staticfunctionHandler(statement){
         }
         return bool;
     })[0];
-    console.log(func, operands);
-
+    func.operands = operands;
+    // $('#data_functions').html($('#data_functions').html() + funcHTML);
     $('#statement').html(statement.call);
     $('#subtitle').html(`Calling the static function <span id="name">${func.name}</span>`)
-    return 1;
+    let tempVars = variables;
+    variables = [];
+    for(let i = 0; i < func.operands.length; i++){
+        variables.push({
+            name: func.parameters[i].name,
+            type: func.parameters[i].type,
+            value: func.operands[i]
+        });
+    }
+    let value = runFunction(func, 0);
+    emptyTempVariables();
+    variables = tempVars;
+    return value;
 }
 
 function listOfOperands(statement){
@@ -76,3 +103,36 @@ function sameType(type, argument){
         //TODO: Add test and Array
     }
 }
+
+function emptyTempVariables(){
+    for(let variable of variables){
+        $(`#_${variable.name}`).remove();
+    }
+}
+
+
+function runFunction(func, count){
+    let currStatement = func.code[count];
+    // console.log(currStatement);
+    if(!currStatement)
+        return '';
+    switch(currStatement.type){
+        case 'declaration': declarationHandler(currStatement); break;
+        case 'assignment': assignmentHandler(currStatement); break;
+        case 'stfunc' : staticfunctionHandler(currStatement); break;
+        case 'if': break;
+        case 'while': break;
+        case 'for': break;
+        case 'return': {
+            return evaluateValue(currStatement.return.replace('return ', ''));
+        };
+    }
+    return runFunction(func, count+1);
+}
+
+// function setNextFuncClick(func, count){
+//     $('#next').click(() => {
+//         $("#next").off("click");
+//         runFunction(func, count + 1);
+//     });
+// };

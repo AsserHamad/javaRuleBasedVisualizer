@@ -86,7 +86,7 @@ function dissectFunctionConstructor(string) {
         static = false,
         returnType, name;
     let parameters = getParameters(string);
-    phrases.map((phrase) => {
+    phrases.filter((phrase) => {
         (phrase.match(/public|private|default|protected/i)) ? access = phrase: null;
         (phrase.match(/static/i)) ? static = true: null;
         (phrase.match(/int|String|float|void/i)) ? returnType = phrase: null;
@@ -111,8 +111,8 @@ function getParameters(string) {
         params = params[0];
     let returnParams = [];
     params = params.split(',');
-    params.map((param) => {
-        param = param.match(/[a-zA-Z]+ [a-zA-Z_0-9]/)[0];
+    params.filter((param) => {
+        param = param.match(/[a-zA-Z]+ [a-zA-Z_0-9]+/)[0];
         param = param.split(' ');
         returnParams.push(new Parameter(param[1], param[0]));
     });

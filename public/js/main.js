@@ -18,14 +18,14 @@ $(document).ready(() => {
                 functions = res.functions;
                 stfunctions = functions.filter((func) => func.static);
                 main = res.main;
-                showAttributes(res, 0);
+                showAttributes(0);
             });
         });
     });
     $('#submit').click();
 });
 
-function showAttributes(res, count){
+function showAttributes(count){
     if(count != attributes.length){
         const attribute = attributes[count];
         let html = `${$('#attributes').html()}
@@ -33,7 +33,7 @@ function showAttributes(res, count){
         $('#attributes').html(html);
         $('#next').click(() => {
             $("#next").off("click");
-            showAttributes(res, count+1);
+            showAttributes(count+1);
         });
     } else {
         $('#t_attributes').css('background-color', 'white');
@@ -41,12 +41,12 @@ function showAttributes(res, count){
         $('#constructors').css('display', 'inline');
         $('#next').click(() => {
             $("#next").off("click");
-            showConstructors(res, 0);
+            showConstructors(0);
         });
     }
 }
 
-function showConstructors(res, count){
+function showConstructors(count){
     if(count != constructors.length){
         const constructor = constructors[count];
         let iter = "";
@@ -58,7 +58,7 @@ function showConstructors(res, count){
         $('#constructors').html(html);
         $('#next').click(() => {
             $("#next").off("click");
-            showConstructors(res, count+1);
+            showConstructors(count+1);
         });
     } else {
         $('#t_constructors').css('background-color', 'white');
@@ -66,12 +66,12 @@ function showConstructors(res, count){
         $('#functions').css('display', 'inline');
         $('#next').click(() => {
             $("#next").off("click");
-            showFunctions(res, 0);
+            showFunctions(0);
         });
     }
 }
 
-function showFunctions(res, count) {
+function showFunctions(count) {
     if (count != functions.length) {
         const func = functions[count];
         let iter = '<div class="col-xs-4 function text-left">';
@@ -86,28 +86,33 @@ function showFunctions(res, count) {
         $('#functions').html(html);
         $('#next').click(() => {
             $("#next").off("click");
-            showFunctions(res, count + 1);
+            showFunctions(count + 1);
         });
     } else {
         $('#t_constructors').css('background-color', 'white');
         $('#t_functions').css('background-color', 'yellow');
         $("#next").off("click");
-        showMain(res, 0);
+        showMain(0);
     }
 }
 
-function showMain(res, count) {
+function showMain(count) {
     let currStatement = main.sequence[count];
     switch(currStatement.type){
-        case 'declaration': declarationHandler(currStatement); break;
-        case 'assignment': assignmentHandler(currStatement); break;
-        case 'stfunc' : staticfunctionHandler(currStatement); break;
-        case 'if': break;
-        case 'while': break;
+        case 'declaration': declarationHandler(currStatement); setNextClick(count);break;
+        case 'assignment': assignmentHandler(currStatement); setNextClick(count);break;
+        case 'stfunc' : staticfunctionHandler(currStatement); setNextClick(count); break;
+        case 'if': ifHandler(currStatement, count); setNextClick(count); break;
+        case 'endif': count = endIfHandler(currStatement, count); setNextClick(count); break;
+        case 'while': whileHandler(currStatement); setNextClick(count); break;
+        case 'endwhile': count = endWhileHandler(currStatement, count); setNextClick(count); break;
         case 'for': break;
     }
+}
+
+function setNextClick(count){
     $('#next').click(() => {
         $("#next").off("click");
-        showMain(res, count + 1);
+        showMain(count + 1);
     });
 }

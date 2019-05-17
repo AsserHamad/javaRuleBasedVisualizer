@@ -36,9 +36,8 @@ function getRandomInt(max) {
 }
 
 function evaluateValue(argument){
-    console.log(`initial argument ${argument}`)
+    // console.log(argument);
     argument = evaluateParenthesisFirst(argument);
-    console.log(`argument after parenthesis ${argument}`)
     //Integer
     if(argument.match(/^ *[0-9]+ *$/)){
         return parseInt(argument.match(/[0-9]+/)[0]);
@@ -68,13 +67,12 @@ function evaluateValue(argument){
     }
     //Operation
     else {
-        let arguments = argument.split(/ *\+|-|\*|\/|==|>=|<=|!=|\|\||&& */);
+        let arguments = argument.split(/ *\+|-|\*|\/|>|<|==|>=|<=|!=|\|\||&& */);
         for(let i = 0; i < argument.slength; i++){
             arguments[i] = evaluateValue(arguments[i]);
         }
-        let operands = argument.match(/\+|-|\*|\/|==|>=|<=|!=|\|\||&&/g);
+        let operands = argument.match(/\+|-|\*|\/|>|<|==|>=|<=|!=|\|\||&&/g);
         let total;
-        console.log('operands', operands, 'argument', argument)
         for(let i = 0; i < operands.length; i++){
             if(i == 0) total = evaluateValue(arguments[i]);
             switch(operands[i]){
@@ -108,7 +106,6 @@ function evaluateParenthesisFirst(argument){
     statement = "";
     for(let i = index; i < argument.length; i++){
         
-        console.log(`argument: ${argument}, argument[${i}]: ${argument[i]}, count: ${count}`)
         if(argument[i] == '('){
             count++;
         }
@@ -120,11 +117,13 @@ function evaluateParenthesisFirst(argument){
         if(count == 0){
             statement = argument.substring(index+1, i);
             argument = argument.replace(argument.substring(index, i+1), evaluateValue(statement));
-            console.log(`ARGUMENT ${argument}`)
             argument = evaluateParenthesisFirst(argument);
             break;
         }
     }
-    console.log(`final parenthesis argument`, argument)
     return argument;
+}
+
+function insertArrayAt(array, index, arrayToInsert) {
+    Array.prototype.splice.apply(array, [index, 0].concat(arrayToInsert));
 }

@@ -6,7 +6,6 @@ function declarationHandler(statement){
         value += declaration[i];
     }
     value = statement.declaration.replace(`${type} ${name} = `, '');
-    console.log(`value ${value}`)
     let variable;
     switch(type){
         case 'int': value = evaluateValue(value); checkMinMax(); variable = new Variable(name, type, value); addNumber(variable); break;
@@ -23,7 +22,7 @@ function addNumber(variable){
     variables.push(variable);
     $('#data_numbers').html(
         $('#data_numbers').html() + `
-        <div class="row">
+        <div id="_${variable.name}" class="row">
             <div class="col-xs-2 text-right"><h4>${variable.name}</h4></div>
             <div class="col-xs-10">
                 <div class="myProgress">
@@ -43,7 +42,7 @@ function addString(variable){
     variables.push(variable);
     $('#data_strings').html(
         $('#data_strings').html() + `
-        <div class="row center-block">
+        <div id="_${variable.name}" class="row center-block">
             <div class="col-xs-2 text-right center-block"><h4>${variable.name}</h4></div>
             <div class="col-xs-10 text-left center-block">
                 <h5>${variable.value}</h5>
@@ -55,7 +54,7 @@ function addBoolean(variable){
     variables.push(variable);
     $('#data_bools').html(
         $('#data_bools').html() + `
-        <div class="row center-block">
+        <div id="_${variable.name}" class="row center-block">
             <div class="col-xs-2 text-right center-block"><h4>${variable.name}</h4></div>
             <div class="col-xs-10 text-left center-block">
                 <h5>${variable.value}</h5>

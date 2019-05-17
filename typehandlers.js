@@ -10,7 +10,6 @@ const handler = function(type, name, value, variables){
     if (duplicate) 
         return duplicate;
     let match = new RegExp(identifierss[type], 'i');
-    console.log(`testing ${match} with ${value}`)
     if(!match.test(value)){
         return {
             error: {

@@ -20,9 +20,10 @@ function handleLogic(statement, sequence){
         statement = statement.replace(assignment, '');
     }
     //If Conditions
-    else if(statement.match(/^ *if\([a-zA-Z0-9.+-=\|&\(\) !]*\)/i)){
-        let _if = statement.match(/if\([a-zA-Z0-9.+-=\|&\(\) !]*\)/i)[0];
-        let condition = _if.substring(3, _if.length-1);
+    else if(statement.match(/^ *if *\([a-zA-Z0-9.\+\-\=><!\/\|&\(\) !]+\)/i)){
+        let _if = statement.match(/if *\([a-zA-Z0-9.\+\-\=><!\/\|&\(\) !]+\)/i)[0];
+        let condition = _if.replace(/if */, '');
+        condition = condition.substring(1, condition.length-1);
         let startIndex = statement.indexOfEnd(_if), counter = 0, endIndex;
         for(let i = startIndex; i < statement.length; i++){
             if(statement[i] == '{')
@@ -64,8 +65,8 @@ function handleLogic(statement, sequence){
         sequence.push(obj);
     }
     //While loop
-    else if(statement.match(/^ *while\([a-zA-Z0-9.+-=\|&\(\) !]*\)/i)){
-        let _while = statement.match(/while\([a-zA-Z0-9.+-=\|&\(\) !]*\)/i)[0];
+    else if(statement.match(/^ *while\([a-zA-Z0-9.\+\-\=><=!\|&\(\) !]*\)/i)){
+        let _while = statement.match(/while\([a-zA-Z0-9.\+\-\=><=!\|&\(\) !]*\)/i)[0];
         let condition = _while.substring(6, _while.length-1);
         let startIndex = statement.indexOfEnd(_while), counter = 0, endIndex;
         for(let i = startIndex; i < statement.length; i++){
@@ -124,8 +125,8 @@ function handleLogic(statement, sequence){
         statement = statement.replace(ret, '');
     }
     //Static Function calls
-    else if(statement.match(/^[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.+-=\|&/,\(\)]*\);/i)){
-        let call = statement.match(/^[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.+-=/,\(\)]*\);/i)[0];
+    else if(statement.match(/^[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.\+\-\=\|&,\(\)]*\);/i)){
+        let call = statement.match(/^[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.\+\-\=\|&,\(\)]*\);/i)[0];
         sequence.push({
             type: 'stfunc',
             call: call.substring(0, call.length-1)

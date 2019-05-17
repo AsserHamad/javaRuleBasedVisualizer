@@ -53,29 +53,37 @@ public int getAge(){
 public static int sum(int x, int y, int z){
     return x + y + z;
 }
-public static int sum(int x, int y){
-    return x + y;
-}
-public static int sum(int x){
-    return x;
+public static int sum(int elem1, int elem2){
+    int zz = elem1 + elem2;
+    return zz;
 }
         </textarea><br>
         <p class="titles">public static void main(String[] args){</p>
         <i>//Main method</i> <a id="rule-main" class="rule-btn btn btn-info"><i class="fas fa-info-circle"></i></a><br>
         
         <textarea class="form-control" id="t_main" name="main" placeholder="This is your playground, test around here" style="height: 340px">
-int x = (3 + 1) * (2 * (7 * sum(1, 1)));
+int x = (3 + 1) * (2 * (7 * sum(3, 1)));
 int y = 2 + 3 * x - 1;
+int da = (((((20)))));
 sum(1,sum(1,sum(x,y)));
 String z = "ababab";
-y = 1;
+y = sum(1, 12);
 boolean a = x == 56 && (false || (true || false) && true);
-if(x == 1){
-    y = 3;
+if(x == 224){
+    if(x > 1){
+        if (true){
+            int bla = 69;
+            y = 10;
+        }
+    }
+} else {
+    y = 8;
 }
-while(y == 3){
-    if(x < 5){
-        x = x + 1;
+while(y > 3){
+    if(x >= 5){
+        y = y - 1;
+    } else {
+        y = y-2;
     }
 }
 for(int i = 1; i < 20; i++){
@@ -127,13 +135,16 @@ for(int i = 1; i < 20; i++){
         <p>
             <h1>Logic</h1>
         </p>
-        <p id="statement"></p>
-        <p id="subtitle"></p><hr>
+        <div class="row" id="whiles"></div>
+        <div class="row" id="ifs"></div>
+        <p id="statement" class="statement"></p>
+        <p id="subtitle" class="subtitle"></p><hr>
         {{!-- <p class="text-left"><h3>Numbers</h3></p> --}}
         <div id="data_numbers" class="row"></div><hr>
         <div id="data_bools" class="row"></div><hr>
         {{!-- <p class="text-left"><h3>Strings</h3></p> --}}
         <div id="data_strings" class="row"></div><hr>
+        <div id="data_functions" class="row"></div>
     </div>
 </div>
 </div>

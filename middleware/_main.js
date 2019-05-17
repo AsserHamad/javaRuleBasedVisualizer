@@ -121,7 +121,6 @@ function getValueOfOperands(type, arr) {
             console.log(`${value} += ${getProperFormat(currentVal, type)}`)
             value += getProperFormat(currentVal, type);
         }
-        console.log('value', value);
     }
     return value;
 }

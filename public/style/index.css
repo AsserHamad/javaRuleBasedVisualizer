@@ -45,7 +45,7 @@ textarea{
 }
 
 /* Logic */
-#statement{
+.statement{
     color: red;
     font-size: 150%;
     font-weight: bold;
@@ -72,5 +72,9 @@ textarea{
     background-color: #4CAF50;
     text-align: center;
     line-height: 30px;
+    color: white;
+}
+.if {
+    border-radius: 20px;
     color: white;
 }

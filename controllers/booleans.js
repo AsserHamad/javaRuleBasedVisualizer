@@ -24,7 +24,6 @@ module.exports = {
             } else {
                 value = getProperFormat(type, currentVal);
             }
-            console.log('value', value);
         }
         return value;
     }
