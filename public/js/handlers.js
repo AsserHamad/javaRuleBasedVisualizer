@@ -36,8 +36,8 @@ function getRandomInt(max) {
 }
 
 function evaluateValue(argument){
-    // console.log(argument);
-    argument = evaluateParenthesisFirst(argument);
+    console.log(argument);
+    argument = evaluateParenthesisFirst(argument) + '';
     //Integer
     if(argument.match(/^ *[0-9]+ *$/)){
         return parseInt(argument.match(/[0-9]+/)[0]);
@@ -66,12 +66,14 @@ function evaluateValue(argument){
         return staticfunctionHandler({type: 'stfunc', call: argument.match(/[a-zA-Z_][a-zA-Z_0-9]*\([a-zA-Z0-9" \.+-=/,\(\)]*\)/)[0]});
     }
     //Operation
+    //TODO: Add modulus
     else {
-        let arguments = argument.split(/ *\+|-|\*|\/|>|<|==|>=|<=|!=|\|\||&& */);
+        let arguments = argument.split(/ *\+|-|\*|\/|>=|<=|==|>|<|!=|\|\||&& */i);
         for(let i = 0; i < argument.slength; i++){
             arguments[i] = evaluateValue(arguments[i]);
         }
-        let operands = argument.match(/\+|-|\*|\/|>|<|==|>=|<=|!=|\|\||&&/g);
+        let operands = argument.match(/\+|-|\*|\/|>=|<=|==|>|<|!=|\\|\||&&/i);
+        console.log('arguments', arguments,'operands', operands)
         let total;
         for(let i = 0; i < operands.length; i++){
             if(i == 0) total = evaluateValue(arguments[i]);
@@ -80,12 +82,12 @@ function evaluateValue(argument){
                 case '-': total -= evaluateValue(arguments[i+1]); break;
                 case '*': total *= evaluateValue(arguments[i+1]); break;
                 case '/': total /= evaluateValue(arguments[i+1]); break;
-                case '>': total /= evaluateValue(arguments[i+1]); break;
-                case '<': total /= evaluateValue(arguments[i+1]); break;
-                case '==': total = total == evaluateValue(arguments[i+1]); break;
-                case '!=': total = total != evaluateValue(arguments[i+1]); break;
                 case '>=': total = total >= evaluateValue(arguments[i+1]); break;
                 case '<=': total = total <= evaluateValue(arguments[i+1]); break;
+                case '>': total = total > evaluateValue(arguments[i+1]); break;
+                case '<': total = total < evaluateValue(arguments[i+1]); break;
+                case '==': total = total == evaluateValue(arguments[i+1]); break;
+                case '!=': total = total != evaluateValue(arguments[i+1]); break;
                 case '&&': total = total && evaluateValue(arguments[i+1]); break;
                 case '||': total = total || evaluateValue(arguments[i+1]); break;
             }
@@ -95,7 +97,7 @@ function evaluateValue(argument){
 }
 
 function evaluateParenthesisFirst(argument){
-    if(!argument.match(/(^\()| \(/))
+    if(typeof argument != 'string' || !argument.match(/(^\()| \(/))
     return argument;
     
     let index = argument.search(/(^\()| \(/i);

@@ -38,6 +38,5 @@ function endIfHandler(statement, count){
         $(`#_${variable.name}`).remove();
         return false;
     });
-
     return statement.count;
 }

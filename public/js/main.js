@@ -22,7 +22,6 @@ $(document).ready(() => {
             });
         });
     });
-    $('#submit').click();
 });
 
 function showAttributes(count){
@@ -89,22 +88,23 @@ function showFunctions(count) {
             showFunctions(count + 1);
         });
     } else {
-        $('#t_constructors').css('background-color', 'white');
-        $('#t_functions').css('background-color', 'yellow');
+        $('#t_functions').css('background-color', 'white');
+        $('#t_main').css('background-color', 'yellow');
         $("#next").off("click");
         showMain(0);
     }
 }
 
 function showMain(count) {
+    console.log(`count of sequence: ${count}`)
     let currStatement = main.sequence[count];
     switch(currStatement.type){
         case 'declaration': declarationHandler(currStatement); setNextClick(count);break;
         case 'assignment': assignmentHandler(currStatement); setNextClick(count);break;
         case 'stfunc' : staticfunctionHandler(currStatement); setNextClick(count); break;
         case 'if': ifHandler(currStatement, count); setNextClick(count); break;
-        case 'endif': count = endIfHandler(currStatement, count); setNextClick(count); break;
-        case 'while': whileHandler(currStatement); setNextClick(count); break;
+        case 'endif': count = endIfHandler(currStatement, count); console.log(`count after if: ${count}`); setNextClick(count); break;
+        case 'while': whileHandler(currStatement, count); setNextClick(count); break;
         case 'endwhile': count = endWhileHandler(currStatement, count); setNextClick(count); break;
         case 'for': break;
     }
