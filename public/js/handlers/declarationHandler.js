@@ -12,6 +12,7 @@ function declarationHandler(statement){
         case 'float': value = evaluateValue(value); checkMinMax(); variable = new Variable(name, type, value); addNumber(variable); break;
         case 'boolean': value = evaluateValue(value); variable = new Variable(name, type, value); addBoolean(variable); break;
         case 'String': value = value.substring(1, value.length-2); variable = new Variable(name, type, value); addString(variable); break;
+        case 'Test': construct(name, value); break;
     }
 
     $('#statement').html(statement.declaration);

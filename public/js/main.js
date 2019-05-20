@@ -22,6 +22,7 @@ $(document).ready(() => {
             });
         });
     });
+    $('#submit').click();
 });
 
 function showAttributes(count){
@@ -96,7 +97,6 @@ function showFunctions(count) {
 }
 
 function showMain(count) {
-    console.log(`count of sequence: ${count}`)
     let currStatement = main.sequence[count];
     switch(currStatement.type){
         case 'declaration': declarationHandler(currStatement); setNextClick(count);break;

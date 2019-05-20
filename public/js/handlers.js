@@ -24,6 +24,16 @@ function moveBars(name, value){
     }
 }
 
+function sameType(type, argument){
+    switch(type){
+        case 'int': return Number.isInteger(argument); break;
+        case 'float': return typeof argument == 'number'; break;
+        case 'String': return typeof argument == 'string'; break;
+        case 'boolean': return typeof argument == 'boolean'; break;
+        //TODO: Add test and Array
+    }
+}
+
 function checkMinMax(){
     max = 0;
     let vars = variables.filter((variable) => variable.type == 'int' || variable.type == 'float');
@@ -36,7 +46,7 @@ function getRandomInt(max) {
 }
 
 function evaluateValue(argument){
-    console.log(argument);
+    // console.log(argument);
     argument = evaluateParenthesisFirst(argument) + '';
     //Integer
     if(argument.match(/^ *[0-9]+ *$/)){
@@ -51,8 +61,19 @@ function evaluateValue(argument){
         return argument.match(/true|false/)[0] == 'true';
     }
     //String
-    else if(argument.match(/^"[a-zA-Z0-9+=-_ '\/\\]"/)){
-        return argument.substring(1, value.length-2);
+    else if(argument.match(/^ *"[a-zA-Z0-9+=-_ '\/\\]+" */)){
+        return argument.match(/"[a-zA-Z0-9+=-_ '\/\\]+"/)[0].substring(1, argument.length-2);
+    }
+    //Attribute
+    else if(argument.match(/^ *[a-zA-Z_]\.[a-zA-Z_0-9]* *$/)){
+        argument = argument.split('.');
+        let name = argument[0];
+        for(let variable of variables){
+            if(variable.name == name){
+                console.log(argument, name, variable)
+                return variable.value[argument[1]];
+            }
+        }
     }
     //Variable
     else if(argument.match(/^ *[a-zA-Z_][a-zA-Z_0-9]* *$/)){

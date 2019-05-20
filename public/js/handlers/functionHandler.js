@@ -94,16 +94,6 @@ function listOfOperands(statement){
     return operands;
 }
 
-function sameType(type, argument){
-    switch(type){
-        case 'int': return Number.isInteger(argument); break;
-        case 'float': return typeof argument == 'number'; break;
-        case 'String': return typeof argument == 'string'; break;
-        case 'boolean': return typeof argument == 'boolean'; break;
-        //TODO: Add test and Array
-    }
-}
-
 function emptyTempVariables(){
     for(let variable of variables){
         $(`#_${variable.name}`).remove();

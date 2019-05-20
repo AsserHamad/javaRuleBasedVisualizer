@@ -99,7 +99,7 @@ function getParameters(string) {
     let returnParams = [];
     params = params.split(',');
     params.map((param) => {
-        param = param.match(/[a-zA-Z]+ [a-zA-Z_0-9]/)[0];
+        param = param.match(/[a-zA-Z]+ [a-zA-Z_0-9]+/)[0];
         param = param.split(' ');
         returnParams.push(new Parameter(param[1], param[0]));
     });
